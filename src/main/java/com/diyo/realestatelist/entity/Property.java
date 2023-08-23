@@ -1,9 +1,7 @@
 package com.diyo.realestatelist.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -13,12 +11,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "property_id_generator", sequenceName = "property_id_sequence")
+
     private Long propertyId;
     private String title;
     private String description;
@@ -34,14 +35,11 @@ public class Property {
     @JoinColumn(name = "location_id")
     private Location location;
 
-   /*@OneToMany(cascade = CascadeType.ALL)
-   @JoinColumn(name = "fkPropertyId", referencedColumnName = "propertyId")
-   private List<Booking> bookings;*/
 
     private Long numberOfBedrooms;
     private Long numberOfBathrooms;
     private String propertyStatus;
-    private Date listingTodaysDate;
+    private Date listingDate;
 
     private Date lastUpdateDate;
 }
